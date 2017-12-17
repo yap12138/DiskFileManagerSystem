@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="dialogRoot" prefHeight="218.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="60.0" prefWidth="450.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <ImageView fx:id="preViewFile" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+            <Separator opacity="0.0" prefWidth="25.0" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <RadioButton fx:id="fileRadio" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" text="文件    " textAlignment="CENTER" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" />
+                  <RadioButton fx:id="dirRadio" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" text="文件夹" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <VBox prefHeight="128.0" prefWidth="222.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="214.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="64.0" prefWidth="64.0" text="文件名：" />
+                        <TextField fx:id="fileNameField" prefHeight="30.0" prefWidth="143.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="214.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="64.0" prefWidth="64.0" text="属性：" />
+                        <ChoiceBox fx:id="attrBox" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="142.0" prefHeight="64.0" prefWidth="450.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <Button fx:id="confirmBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" text="确认" />
+            <Separator opacity="0.0" prefWidth="100.0" />
+            <Button fx:id="cancelBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" text="取消" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

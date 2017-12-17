@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" prefHeight="640.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="70.0" prefWidth="452.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Separator opacity="0.0" prefWidth="50.0" />
+            <ImageView fx:id="iconImage" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
+            <Separator opacity="0.0" prefWidth="50.0" />
+            <TextField fx:id="nameField" prefHeight="30.0" prefWidth="226.0" />
+         </children>
+      </HBox>
+      <Separator layoutX="14.0" layoutY="92.0" prefWidth="452.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <VBox layoutX="14.0" layoutY="100.0" prefHeight="240.0" prefWidth="452.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="452.0">
+               <children>
+                  <Separator opacity="0.0" prefWidth="30.0" />
+                  <Label text="类型：" />
+                  <Separator opacity="0.0" prefWidth="100.0" />
+                  <Label fx:id="suffixLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="452.0">
+               <children>
+                  <Separator opacity="0.0" prefWidth="30.0" />
+                  <Label text="位置：" />
+                  <Separator opacity="0.0" prefWidth="100.0" />
+                  <Label fx:id="pathLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="452.0">
+               <children>
+                  <Separator opacity="0.0" prefWidth="30.0" />
+                  <Label text="大小：" />
+                  <Separator opacity="0.0" prefWidth="100.0" />
+                  <Label fx:id="sizeLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="452.0">
+               <children>
+                  <Separator opacity="0.0" prefWidth="30.0" />
+                  <Label text="属性：" />
+                  <Separator opacity="0.0" prefWidth="100.0" />
+                  <RadioButton fx:id="rRadio" mnemonicParsing="false" prefHeight="20.0" prefWidth="66.0" text="只读" />
+                  <Separator opacity="0.0" prefWidth="10.0" />
+                  <RadioButton fx:id="sysRadio" mnemonicParsing="false" prefHeight="20.0" text="系统文件" />
+                  <Separator opacity="0.0" prefWidth="10.0" />
+                  <RadioButton fx:id="rwRadio" mnemonicParsing="false" text="可读写" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Separator layoutX="14.0" layoutY="348.0" prefWidth="452.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <TextArea fx:id="contentArea" layoutX="14.0" layoutY="356.0" prefHeight="226.0" prefWidth="452.0" />
+      <HBox alignment="CENTER_RIGHT" layoutX="14.0" layoutY="590.0" prefHeight="50.0" prefWidth="452.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button fx:id="confirmBtn" mnemonicParsing="false" prefWidth="70.0" text="确认" />
+            <Separator opacity="0.0" prefWidth="20.0" />
+            <Button fx:id="cancelBtn" mnemonicParsing="false" prefWidth="70.0" text="取消" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

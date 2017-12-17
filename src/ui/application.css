@@ -1,0 +1,24 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#diskDetailPane {
+	-fx-background-color:white 
+}
+
+#tabPane {
+	-fx-border-color:silver
+}
+
+#fileTreeView {
+	-fx-border-color:silver
+}
+
+#sreachField{
+	-fx-border-color:silver
+}
+
+#sreachbtn{
+	-fx-border-color:silver
+}
+.button:hover {
+   -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
