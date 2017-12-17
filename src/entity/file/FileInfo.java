@@ -333,8 +333,8 @@ public class FileInfo {
 			byte[] subIndex = new byte[16];
 			int pos = 0;
 			Collection<FileInfo>subCatalog = subMap.values();
-			for (Iterator iterator = subCatalog.iterator(); iterator.hasNext();) {
-				FileInfo fileInfo = (FileInfo) iterator.next();
+			for (Iterator<FileInfo> iterator = subCatalog.iterator(); iterator.hasNext();) {
+				FileInfo fileInfo = iterator.next();
 				subIndex[pos++] = 0;							//short 的高位
 				subIndex[pos++] = fileInfo.getStartPos();		//short 的低位
 			}
@@ -373,6 +373,7 @@ public class FileInfo {
 		this.catelogItem = buffer;
 	}
 	
+	@SuppressWarnings("unused")
 	private void updataCatalogItem2() throws IOException {
 		getAbsolutePath();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -393,8 +394,8 @@ public class FileInfo {
 			byte[] subIndex = new byte[16];
 			int pos = 0;
 			Collection<FileInfo> subCatalog = subMap.values();
-			for (Iterator iterator = subCatalog.iterator(); iterator.hasNext();) {
-				FileInfo fileInfo = (FileInfo) iterator.next();
+			for (Iterator<FileInfo> iterator = subCatalog.iterator(); iterator.hasNext();) {
+				FileInfo fileInfo = iterator.next();
 				subIndex[pos++] = 0; // short 的高位
 				subIndex[pos++] = fileInfo.getStartPos(); // short 的低位
 			}

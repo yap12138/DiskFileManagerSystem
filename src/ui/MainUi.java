@@ -12,17 +12,12 @@ import java.util.Optional;
 import java.util.Queue;
 
 import entity.FATItem;
-import entity.FileAllocationTable;
 import entity.file.FileInfo;
 import entity.file.FileType;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -133,6 +128,7 @@ public class MainUi {
 	/**
 	 * 找到所有ui控件
 	 */
+	@SuppressWarnings("unchecked")
 	private void findAllViews() {
 		sreachField = (TextField) root.lookup("#sreachField");
 		sreachField.setTooltip(new Tooltip("绝对路径或相对路径，如：root/yap.dat 或 yap.dat"));
@@ -164,7 +160,7 @@ public class MainUi {
 			}
 		});
 		
-		fatView = (TableView) root.lookup("#fatTable");
+		fatView = (TableView<FATItem>) root.lookup("#fatTable");
 		
 		try {
 			folderIcon = new Image(new File("res/icons/folder_style1.png").toURI().toURL().toExternalForm());
@@ -465,7 +461,7 @@ public class MainUi {
 						curNode.setAttr(newAttr.intValue());
 					}
 					String newContext = (String) params.get("newContext");
-					if (newContext != null) {	//修改了内容则将内容写回
+					if (newContext != null) {	//修改了内容则将原来的内容删除后，新内容写回
 						boolean flag = diskManager.writeFileContent(curNode, newContext);
 						if (!flag) {	//写入失败
 							Util.callAlert(AlertType.ERROR, "错误", "磁盘空间不足", primaryStage);

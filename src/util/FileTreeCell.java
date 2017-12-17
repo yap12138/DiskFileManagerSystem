@@ -3,7 +3,6 @@ package util;
 import java.util.ArrayList;
 
 import entity.file.FileInfo;
-import javafx.beans.value.ChangeListener;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -81,7 +80,6 @@ public class FileTreeCell extends TreeCell<FileInfo> {
 				}
 			}
 			selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-	            String col ;
 	            if (isNowSelected) {
 	            	textProperty().bind(item.getFullNameProperty());
 	            } else {

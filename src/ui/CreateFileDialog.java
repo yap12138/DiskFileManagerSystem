@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
 
 import entity.file.FileInfo;
 import entity.file.FileType;
@@ -16,26 +14,20 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import util.Util;
 
 public class CreateFileDialog extends Stage {
@@ -51,6 +43,7 @@ public class CreateFileDialog extends Stage {
 	private ImageView preview;
 	
 	private TextField fileName;
+	@SuppressWarnings("rawtypes")
 	private ChoiceBox attrBox;
 	
 	private Button confirmBtn;
@@ -98,6 +91,7 @@ public class CreateFileDialog extends Stage {
 	/**
 	 * 初始化属性
 	 */
+	@SuppressWarnings("rawtypes")
 	private void initField() {
 		try {
 			folderIcon = new Image(new File("res/icons/big_folder_style1.png").toURI().toURL().toExternalForm());
@@ -122,12 +116,13 @@ public class CreateFileDialog extends Stage {
 		selFile.setUserData(fileIcon);
 		selDir.setUserData(folderIcon);
 		
-		//将radiobutton设置到同一个组
+		//将radio button设置到同一个组
 		ToggleGroup group = new ToggleGroup();
 		selFile.setToggleGroup(group);
 		selDir.setToggleGroup(group);
-		//设置监听，当选中的radio button改变时，更改choicebox中的内容
+		//设置监听，当选中的radio button改变时，更改choice box中的内容
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				if(group.getSelectedToggle() != null) {
