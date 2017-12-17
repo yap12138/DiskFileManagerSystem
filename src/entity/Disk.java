@@ -64,7 +64,6 @@ public class Disk {
 				 FileInfo root = new FileInfo("root", FileInfo.Attr_sysFile, 2);	//初始化根目录
 				 byte[] rootCatelog = root.getCatelogItem();
 				 inout.write(rootCatelog);
-				 
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -182,10 +181,9 @@ public class Disk {
 	 * 写入目录项
 	 * @param startPos	开始的盘块
 	 * @param item		目录项
-	 * @param fat		文件分配表
 	 * @return
 	 */
-	public boolean storeCatalogItem(int startPos, byte[] item, byte[] fat) {
+	public boolean storeCatalogItem(int startPos, byte[] item) {
 		try {
 			try (RandomAccessFile inout = new RandomAccessFile(simulateDisk, "rw");) {
 				inout.seek(startPos*Util.bytePerBlock);

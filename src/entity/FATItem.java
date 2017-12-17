@@ -11,8 +11,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class FATItem {
 	
-	final IntegerProperty curIndex = new SimpleIntegerProperty();
-	final IntegerProperty nextIndex = new SimpleIntegerProperty(0);
+	final IntegerProperty curIndex = new SimpleIntegerProperty();	//当前项索引
+	final IntegerProperty nextIndex = new SimpleIntegerProperty(0);	//0表示该项未使用，否则指向下一盘块
 	
 	public FATItem(int index) {
 		curIndex.set(index);

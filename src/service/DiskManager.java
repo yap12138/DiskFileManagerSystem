@@ -71,7 +71,6 @@ public class DiskManager {
 	 */
 	public void updataCatalogItems() {
 		FileInfo root = disk.getRootDir();
-		byte[] fat = FAT.getTable();
 		//广度优先搜索
 		Queue<FileInfo> queue = new LinkedList<>();
 		queue.offer(root);
@@ -81,7 +80,7 @@ public class DiskManager {
 			//写入目录项
 			var.updataCatalogItem();
 			byte[] item = var.getCatelogItem();
-			disk.storeCatalogItem(var.getStartPos(), item, fat);
+			disk.storeCatalogItem(var.getStartPos(), item);
 			if (var.subMap != null && var.subMap.size() != 0) {	//如果有子文件或目录，则加载
 				Collection<FileInfo> collection = var.subMap.values();
 				for (Iterator<FileInfo> iterator = collection.iterator(); iterator.hasNext();) {
@@ -140,7 +139,7 @@ public class DiskManager {
 			curDirectory.addChild(file);
 			totalFiles.put(fileName, file);
 			//存目录项
-			disk.storeCatalogItem(startNum, file.getCatelogItem(), FAT.getTable());
+			disk.storeCatalogItem(startNum, file.getCatelogItem());
 			//磁盘存文件
 			if (size > 0)
 				disk.store(file.getContentBytes(), file.getContentPos(), FAT.getTable());
@@ -174,7 +173,7 @@ public class DiskManager {
 			curDirectory.addChild(dir);
 			totalFiles.put(dirName, dir);
 			//存目录项
-			disk.storeCatalogItem(startNum, dir.getCatelogItem(), FAT.getTable());
+			disk.storeCatalogItem(startNum, dir.getCatelogItem());
 			//更新FAT
 			disk.updataFAT(FAT.getTable());
 			
@@ -210,15 +209,34 @@ public class DiskManager {
 		byte[] temp = data.getBytes();
 		int shortestLength = temp.length/64 + 1;
 		int contentStart;
-		contentStart = FAT.alloc(shortestLength);
-		if (contentStart == -1) {	//磁盘空间不足
+		boolean flag;
+		if (data.length() > file.getLength()) {		//判断是否够空间
+			flag = FAT.canAlloc(shortestLength - file.getLength());
+		} else {
+			flag = true;
+		}
+		if (!flag) {	//磁盘空间不足
 			return false;
 		} else {
-			byte[] buffer = Util.bytesToBlock(temp, shortestLength);
-			disk.store(buffer, contentStart, FAT.getTable());
-			file.setContent(data);
-			file.setContentPos(contentStart);
-			file.setLength(shortestLength);
+			//删除旧空间
+			if (file.getLength() != 0) {
+				disk.deleteRom(file.getContentPos(), FAT);
+			}
+			//是否将全部内容删除
+			if (data.equals("")) {
+				file.setContent(null);
+				file.setContentPos(0);
+				file.setLength(0);
+			} else {
+				//分配新空间
+				contentStart = FAT.alloc(shortestLength);
+				
+				byte[] buffer = Util.bytesToBlock(temp, shortestLength);
+				disk.store(buffer, contentStart, FAT.getTable());
+				file.setContent(data);
+				file.setContentPos(contentStart);
+				file.setLength(shortestLength);
+			}
 			//新的FAT写回磁盘
 			disk.updataFAT(FAT.getTable());
 			return true;

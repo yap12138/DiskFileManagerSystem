@@ -21,7 +21,7 @@ public class FileAllocationTable {
 	
 	private ObservableList<FATItem> ObservableFAT;	//可观察列表，用于绑定前端UI
 	
-	
+	//用于饼图显示
 	private DoubleProperty totalProperty = new SimpleDoubleProperty(128);
 	private DoubleProperty remainProperty = new SimpleDoubleProperty();
 	private DoubleProperty usedProperty = new SimpleDoubleProperty();
@@ -102,5 +102,12 @@ public class FileAllocationTable {
 		this.table[i-1] = FileInfo.FOE;
 		updataObservableList();
 		return mark[0];	
+	}
+	
+	public boolean canAlloc(int size) {
+		if (size > remainProperty.get()) {	
+			return false;
+		}
+		return true;
 	}
 }
