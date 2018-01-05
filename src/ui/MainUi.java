@@ -380,15 +380,14 @@ public class MainUi {
 						//存在同名同后缀文件
 						Util.callAlert(AlertType.ERROR, "文件创建失败", "存在同名文件", primaryStage);
 					} else if(flag == -3) {
+						//磁盘空间不足
 						Util.callAlert(AlertType.ERROR, "文件创建失败", "磁盘空间不足", primaryStage);
 					} else if(flag == -2) {
-						if (params.get("type") == FileType.File) {
-							//文件属性如果是只读性质则不能建立
-							Util.callAlert(AlertType.ERROR, "文件创建失败", "只读文件无法创建", primaryStage);
-						} else {
-							//超过当前文件夹的子文件数量限制
-							Util.callAlert(AlertType.ERROR, "文件创建失败", "超过当前文件夹的子文件数量限制", primaryStage);
-						}
+						//超过当前文件夹的子文件数量限制
+						Util.callAlert(AlertType.ERROR, "文件创建失败", "超过当前文件夹的子文件数量限制", primaryStage);
+					} else if(flag == -4) {
+						//文件属性如果是只读性质则不能建立
+						Util.callAlert(AlertType.ERROR, "文件创建失败", "只读文件无法创建", primaryStage);
 					} else {
 						Util.callAlert(AlertType.ERROR, "错误", "文件创建失败", primaryStage);
 					}

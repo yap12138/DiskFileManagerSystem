@@ -114,9 +114,12 @@ public class DiskManager {
 		if (curDirectory.subMap.containsKey(fileName)) {
 			//存在同名同后缀文件
 			return -1;
+		} else if (curDirectory.subMap.size() >= this.FileInDirLimit) {
+			//超过子文件数量限制
+			return -2;
 		} else if (attr == FileInfo.Attr_readOnly) {
 			//文件属性如果是只读性质则不能建立
-			return -2;
+			return -4;
 		} else {
 			if (FAT.getRemainProperty().get() < 1 + size) {
 				//如果不够分配一个目录项+文件内容的空间则创建失败

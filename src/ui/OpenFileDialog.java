@@ -127,6 +127,10 @@ public class OpenFileDialog extends Stage {
 		sizeLabel = (Label) root.lookup("#sizeLabel");
 		sizeLabel.setText(openFile.getLength()*Util.bytePerBlock + " 字节");
 		
+		if (openFile.getLength() != 0) {
+			sizeLabel.setText(sizeLabel.getText() + " (起始盘块号: " + openFile.getContentPos() + ")");
+		}
+		
 		rRadio = (RadioButton) root.lookup("#rRadio");
 		sysRadio = (RadioButton) root.lookup("#sysRadio");
 		rwRadio = (RadioButton) root.lookup("#rwRadio");
