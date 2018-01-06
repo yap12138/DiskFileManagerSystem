@@ -28,6 +28,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -186,17 +187,28 @@ public class MainUi {
 			@Override
 			public void handle(ActionEvent event) {
 				//判断输入的是绝对路径还是文件/目录名
+				fileTree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+				fileTree.getSelectionModel().clearSelection();
 				String path = sreachField.getText();
 				int chIndex = path.indexOf('/');
-				if (chIndex != -1) {
-					path = Util.getFullNameForAbsolute(path);
+				if (chIndex == -1) {
+					//path = Util.getFullNameForAbsolute(path);
+					fileTree.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+					Collection<FileInfo> list = diskManager.totalFiles.values();
+					FileInfo[] flist = new FileInfo[list.size()];
+					list.toArray(flist);
+					for(int i = 0; i < flist.length; i++) {
+						if(flist[i].getName().equals(path))
+							fileTree.getSelectionModel().select(flist[i].getTag());
+					}
+				} else {
+					FileInfo fileInfo = diskManager.totalFiles.get(path);
+					if (fileInfo == null) {
+						Util.callAlert(AlertType.WARNING, "查找错误", "查找的文件/目录名格式不正确！ 请使用绝对路径或相对路径", primaryStage);
+						return;
+					}
+					fileTree.getSelectionModel().select(fileInfo.getTag());
 				}
-				FileInfo fileInfo = diskManager.totalFiles.get(path);
-				if (fileInfo == null) {
-					Util.callAlert(AlertType.WARNING, "查找错误", "查找的文件/目录名格式不正确！ 请使用绝对路径或相对路径", primaryStage);
-					return;
-				}
-				fileTree.getSelectionModel().select(fileInfo.getTag());
 			}
 		});
 		

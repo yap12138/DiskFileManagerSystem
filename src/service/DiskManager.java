@@ -52,8 +52,8 @@ public class DiskManager {
 				for (int i = 0; i < var.childStartPos.length; i++) {
 					short startPos = var.childStartPos[i];		//找到目录项位置
 					FileInfo child = loadFileInfo(startPos);
-					totalFiles.put(child.getName(), child);
 					var.addChild(child);
+					totalFiles.put(child.getAbsolutePath(), child);
 					if (!child.isFile()) {		//是目录则推入队列，查找是否有子项
 						queue.offer(child);
 					}
@@ -140,7 +140,7 @@ public class DiskManager {
 			}
 			FileInfo file = new FileInfo(fileName, attr, startNum, contentStart, size, content);
 			curDirectory.addChild(file);
-			totalFiles.put(fileName, file);
+			totalFiles.put(file.getAbsolutePath(), file);
 			//存目录项
 			disk.storeCatalogItem(startNum, file.getCatelogItem());
 			//磁盘存文件
@@ -174,7 +174,7 @@ public class DiskManager {
 			}
 			FileInfo dir = new FileInfo(dirName, attr, startNum);
 			curDirectory.addChild(dir);
-			totalFiles.put(dirName, dir);
+			totalFiles.put(dir.getAbsolutePath(), dir);
 			//存目录项
 			disk.storeCatalogItem(startNum, dir.getCatelogItem());
 			//更新FAT
@@ -190,7 +190,7 @@ public class DiskManager {
 	public void deleteFileInfo(FileInfo delNode) {
 		FileInfo parentNode = delNode.parent;
 		parentNode.subMap.remove(delNode.getName());
-		totalFiles.remove(delNode.getName());
+		totalFiles.remove(delNode.getAbsolutePath());
 		//删除目录项
 		disk.deleteRom(delNode.getStartPos(), FAT);
 		//删除文件内容
